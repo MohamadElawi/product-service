@@ -13,7 +13,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::get();
+        $products = Product::latest()->get();
         return response()->json(ProductResource::collection($products));
     }
 
@@ -134,7 +134,7 @@ class ProductController extends Controller
         return ;
     }
 
-    public function delete(Product $product){
+    public function destroy(Product $product){
         $product->delete();
         return ;
     }

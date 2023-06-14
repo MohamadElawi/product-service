@@ -15,8 +15,6 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
 
-        dd(auth()->user());
-        // $categories = Category::latest()->get();
         $categories = Category::latest()->get();
         // return CategoryResource::collection($categories);
         return response()->json(CategoryResource::collection($categories));

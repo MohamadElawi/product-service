@@ -15,7 +15,7 @@ class Product extends Model implements HasMedia, TranslatableContract
 
     protected $fillable = ['category_id', 'price', 'quantity', 'is_special', 'status', 'product_id'];
 
-    public $translatedAttributes = ['name', 'desciprion', 'details'];
+    public $translatedAttributes = ['name', 'description', 'details'];
 
     protected $hidden = ['updated_at', 'translations'];
 

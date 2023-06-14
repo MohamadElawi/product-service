@@ -19,7 +19,7 @@ class ProductResource extends JsonResource
             'images' => $this->images,
             'category_id' => $this->category_id,
             'category_name' => $this->category?->name,
-            'price' => $this->price,
+            'price' => (int) $this->price,
             'quantity' => $this->quantity,
             'is_special' => $this->is_special,
             'created_at' => $this->created_at->format('Y-m-d')

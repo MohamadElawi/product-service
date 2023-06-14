@@ -31,9 +31,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 ##################### User api
 Route::get('all-category',[CategoryController::class ,'getAllCategory'])->middleware('role');
 Route::get('get-By-Category/{category}',[ProductController::class ,'getProductByCategory']);
-Route::get('show/{product}',[ProductController::class ,'show']);
+Route::get('product/show/{product}',[ProductController::class ,'show']);
 
-Route::get('product/favourite/{product}',[FavouriteController::class,'toggleFavourite'])->middleware('role');
+Route::get('product/favourite/{product}',[FavouriteController::class,'toggleFavourite']);
 Route::get('product/get-favourite',[FavouriteController::class,'getFavourite'])->middleware('role');
 
 

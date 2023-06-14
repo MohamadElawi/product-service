@@ -61,7 +61,7 @@ class ProductObserver
                 //         $spe_product->copyMedia($image)->toMediaCollection('product_images','product');
                 //     }
 
-                $spe_product->save();
+                // $spe_product->save();
 
                 // $images = DB::table('media')->where('model_type', 'App\Models\Product')->where('model_id', $product->id)->get();
 
