@@ -13,6 +13,7 @@ class IndexResource extends JsonResource
             'id'=>$this->id ,
             'name'=>$this->name ,
             'image'=>$this->getFirstMediaUrl('main_image'),
+            'price' => $this->price ,
         ];
     }
 }

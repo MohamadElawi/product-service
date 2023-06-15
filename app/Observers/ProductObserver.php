@@ -35,19 +35,19 @@ class ProductObserver
      */
     public function updated(Product $product)
     {
-        // if ($product->is_special == 0 && $this->request->is_special == 1) {
-        //     if ($product->quantity != $this->request->quantity_special_product) {
-        //         $spe_product = Product::create([
-        //             'category_id' => $product->category_id,
-        //             'price' => $this->request->price,
-        //             'quantity' => $this->request->quantity_special_product,
-        //             'is_special' => 1,
-        //             'product_id' => $product->id,
-        //         ]);
-        //         $spe_product->translateOrNew('en')->name = $product->name;
-        //         $spe_product->translateOrNew('en')->description = $product->description;
-        //         $spe_product->translateOrNew('en')->details = $product->details;
-        //         $spe_product->save();
+        if ($product->is_special == 0 && $this->request->is_special == 1) {
+            if ($product->quantity != $this->request->quantity_special_product) {
+                $spe_product = Product::create([
+                    'category_id' => $product->category_id,
+                    'price' => $this->request->price,
+                    'quantity' => $this->request->quantity_special_product,
+                    'is_special' => 1,
+                    'product_id' => $product->id,
+                ]);
+                $spe_product->translateOrNew('en')->name = $product->name;
+                $spe_product->translateOrNew('en')->description = $product->description;
+                $spe_product->translateOrNew('en')->details = $product->details;
+                $spe_product->save();
 
                 // $spe_product->copy($product,'images','product');
                 // $image = $product->getMedia('main_image');
@@ -61,7 +61,7 @@ class ProductObserver
                 //         $spe_product->copyMedia($image)->toMediaCollection('product_images','product');
                 //     }
 
-                // $spe_product->save();
+                $spe_product->save();
 
                 // $images = DB::table('media')->where('model_type', 'App\Models\Product')->where('model_id', $product->id)->get();
 
@@ -72,8 +72,8 @@ class ProductObserver
                 //     $duplicatedRow['model_id'] = $spe_product->id;
                 //     DB::table('media')->insert($duplicatedRow);
                 // }
-            // }
-        // }
+            }
+        }
     }
     /**
      * Handle the Product "deleted" event.

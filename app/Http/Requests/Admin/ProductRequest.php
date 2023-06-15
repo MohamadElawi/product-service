@@ -25,10 +25,17 @@ class ProductRequest extends FormRequest
             'quantity'=>'required|numeric',
             'category_id'=>'required|exists:categories,id',
             'price'=>'required|numeric',
-            'main_image'=>'required|file|mimes:png,jpg,jpeg|max:4096',
-            'images' => 'array|required|max:3',
-            'images.*'=>'required|image|mimes:png,jpg,jpeg',
-            'quantity_special_product' => 'required_with:_method|lte:quantity|numeric' ,
+            'main_image'=>'required_without:_method|file|mimes:png,jpg,jpeg|max:4096',
+            // 'images' => 'array|required|max:3',
+            // 'images.*'=>'required|image|mimes:png,jpg,jpeg',
+            'quantity_special_product' => 'required_with:_method|required_if:is_special,1|lte:quantity|numeric' ,
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required_without' => 'The :attribute field is required.'
         ];
     }
 

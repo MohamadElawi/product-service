@@ -16,7 +16,7 @@ class ProductResource extends JsonResource
             'details' => $this->details,
             'status' => $this->status,
             'image' => $this->getFirstMediaUrl('main_image'),
-            'images' => $this->images,
+            // 'images' => $this->images,
             'category_id' => $this->category_id,
             'category_name' => $this->category?->name,
             'price' => (int) $this->price,

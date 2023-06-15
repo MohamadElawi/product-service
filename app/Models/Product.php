@@ -23,7 +23,7 @@ class Product extends Model implements HasMedia, TranslatableContract
         'created_at' => 'datetime:Y-m-d H:00'
     ];
 
-    public $appends = ['images'];
+    // public $appends = ['images'];
 
 
     public function registerMediaCollections(): void
@@ -34,15 +34,15 @@ class Product extends Model implements HasMedia, TranslatableContract
 
 
     /// accessor
-    public function getImagesAttribute()
-    {
-        $product_images = $this->getMedia('product_images');
-        $images = array();
-        for ($i = 0; $i < sizeof($product_images); $i++) {
-            $images[$i] = $product_images[$i]->getUrl();
-        }
-        return $images;
-    }
+    // public function getImagesAttribute()
+    // {
+    //     $product_images = $this->getMedia('product_images');
+    //     $images = array();
+    //     for ($i = 0; $i < sizeof($product_images); $i++) {
+    //         $images[$i] = $product_images[$i]->getUrl();
+    //     }
+    //     return $images;
+    // }
 
 
     public function category()
