@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\User\FavouriteController;
 use App\Http\Controllers\User\CategoryController ;
+use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\ProductController ;
 use App\Http\Resources\Admin\ProductResource;
 use App\Models\Category;
@@ -22,11 +23,6 @@ use Ite\IotCore\Context\UserActivityContext;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
 
 ##################### User api
 Route::get('all-category',[CategoryController::class ,'getAllCategory']);
@@ -38,19 +34,15 @@ Route::get('product/favourite/{product}',[FavouriteController::class,'toggleFavo
 Route::get('product/get-favourite',[FavouriteController::class,'getFavourite'])->middleware('role');
 
 
+Route::group(['prefix'=>'order'],function(){
+    Route::post('check',[OrderController::class , 'checkOrder'])->middleware('role');    
+    Route::post('payment',[OrderController::class , 'createOrder'])->middleware('role');    
+
+});
+
+
 
 Route::get('test',function(Request $request ,UserActivityContext $context){
     dd($context->getUsersActivities());
-    dd(auth()->user());
-
-    auth()->guard('admin');
-    auth()->guard('admin')->user();
-
 });
 
-
-
-Route::post('tt',function(Request $request){
-     $product  = Category::first();
-    $product->addMediaFromUrl('http://127.0.0.1:8080/storage/product/209/287494689_541786067482991_1026455631942863110_n.jpg')->toMediaCollection('main_images');
-});

@@ -20,15 +20,6 @@ class CategoryController extends Controller
         return response()->json(CategoryResource::collection($categories));
     }
 
-    public function getData(){
-        $categories = Category::latest()->get();
-        return DataTables::of($categories)
-        // ->addColumn('action', 'admin.categories.actions')/
-        ->addIndexColumn()
-        ->make(true);
-
-    }
-
     public function getActiveCategory(){
         $categories =Category::active()->latest()->get();
         return response()->json($categories);

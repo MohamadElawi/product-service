@@ -70,4 +70,9 @@ class Product extends Model implements HasMedia, TranslatableContract
     {
         return $query->where('is_special', 1);
     }
+
+    public function scopeAvailable($query){
+        return $query->where('quantity','>',0);
+    }
+
 }
