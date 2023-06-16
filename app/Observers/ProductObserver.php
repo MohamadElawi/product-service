@@ -47,31 +47,13 @@ class ProductObserver
                 $spe_product->translateOrNew('en')->name = $product->name;
                 $spe_product->translateOrNew('en')->description = $product->description;
                 $spe_product->translateOrNew('en')->details = $product->details;
-                $spe_product->save();
+          
 
-                // $spe_product->copy($product,'images','product');
-                // $image = $product->getMedia('main_image');
-                // dd($image);
-                // if($image != null)
-                //     $spe_product->copyMedia($image)->toMediaCollection('main_image','product');
-
-                // $images = $product->getMedia('product_images');
-                // if($images != null)
-                //     foreach($images as $image){
-                //         $spe_product->copyMedia($image)->toMediaCollection('product_images','product');
-                //     }
+                $image = $product->getFirstMedia('main_image');
+                if($image != null)
+                    $image->copy($spe_product,'main_image','product');
 
                 $spe_product->save();
-
-                // $images = DB::table('media')->where('model_type', 'App\Models\Product')->where('model_id', $product->id)->get();
-
-                // foreach ($images as $row) {
-                //     $duplicatedRow = (array) $row;
-                //     unset($duplicatedRow['id']);
-                //     unset($duplicatedRow['uuid']);
-                //     $duplicatedRow['model_id'] = $spe_product->id;
-                //     DB::table('media')->insert($duplicatedRow);
-                // }
             }
         }
     }

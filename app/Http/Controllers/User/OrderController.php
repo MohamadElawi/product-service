@@ -35,7 +35,7 @@ class OrderController extends Controller
                     return failure("There is not enough from $product->name required", 450);
             }
 
-            //TODO   integration with stripe 
+            //TODO   integration with stripe
             // Stripe::setApiKey(env('STRIPE_SECRET'));
 
             // $token = $request->input('stripe_token');
@@ -62,6 +62,8 @@ class OrderController extends Controller
                     'product_id' => $item['product_id'],
                     'price' => $product->price,
                     'quantity' => $item['quantity'],
+                    'created_at' => now(),
+                    'updated_at' => now()
                 ];
                 $product->decrement('quantity',$item['quantity']);
                 $product->save();
