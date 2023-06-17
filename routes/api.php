@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\User\FavouriteController;
 use App\Http\Controllers\User\CategoryController ;
+use App\Http\Controllers\User\MaintenanceController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\ProductController ;
 use App\Http\Resources\Admin\ProductResource;
@@ -51,4 +52,9 @@ Route::get('test',function(Request $request ,UserActivityContext $context){
     dd();
     dd($context->getUsersActivities());
 });
+// Route::resource('maintenance', MaintenanceController::class)->only('store','update');
 
+Route::post('maintenance/create/{service}',[MaintenanceController::class ,'createCard'])->middleware('role');
+Route::post('maintenance/update/{maintenance}',[MaintenanceController::class ,'update'])->middleware('role');
+Route::post('maintenance/delete/{maintenance}',[MaintenanceController::class ,'delete'])->middleware('role');
+Route::get('maintenance/index',[MaintenanceController::class ,'index'])->middleware('role');
