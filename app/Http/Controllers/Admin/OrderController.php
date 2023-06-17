@@ -16,7 +16,9 @@ class OrderController extends Controller
     }
 
     public function show(Order $order){
-        $order = Order::with('items')->find($order->id);
+        $order = Order::with(['items'=>function($q){
+            $q->with('product');
+        }])->find($order->id);
         return response()->json(OrderItemResource::collection($order->items));
     }
 }
