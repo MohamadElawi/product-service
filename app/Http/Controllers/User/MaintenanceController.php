@@ -49,7 +49,7 @@ class MaintenanceController extends Controller
         $maintenance_cards= Maintenance::where("user_id",$user->id)->latest()->get();
         return response()->json(MaintenanceResource::collection($maintenance_cards));
     }
-    public function delete (MaintenanceRequest $request, maintenance $maintenance){
+    public function delete (maintenance $maintenance){
         $user= auth()->user();
         $maintenance_card = Maintenance::where('id',$maintenance->id)->where('user_id',$user->id)->where('status','pending')->firstOrFail();
         $maintenance_card->delete();
@@ -62,12 +62,12 @@ class MaintenanceController extends Controller
 
         if($maintenanceTime->maintenance_id == $maintenance->id)
             abort(404);
-        
+
         $maintenance->appointment_at = $maintenanceTime->date ;
         $maintenance->status = 'under proccessing';
         $maintenance->save();
         DB::table('maintenance_times')->where('maintenance_id' ,$maintenance->id)->delete();
         return success('done');
     }
-    
+
 }

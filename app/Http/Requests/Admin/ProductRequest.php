@@ -20,7 +20,7 @@ class ProductRequest extends FormRequest
         return [
             'name_en'=>'required|string',
             'details_en'=>'required|string',
-            'description_en'=>'required4',
+            'description_en'=>'required|string',
             'is_special'=>'in:0,1',
             'quantity'=>'required|numeric',
             'category_id'=>'required|exists:categories,id',

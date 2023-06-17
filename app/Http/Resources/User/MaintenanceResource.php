@@ -14,11 +14,13 @@ class MaintenanceResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [ 'description'=> $this->description,
-        'location'=> $this->location,
-        'street'=> $this->street,
-        'area'=> $this->area,
-        'status'=> $this->status,
-        'appointmant_at'=>$this->appointment];
+        return [
+            'description' => $this->description,
+            'location' => $this->location,
+            'street' => $this->street,
+            'area' => $this->area,
+            'status' => $this->status,
+            'appointmant_at' => $this->appointment_at
+        ];
     }
 }

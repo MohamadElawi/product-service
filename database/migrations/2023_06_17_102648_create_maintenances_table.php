@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('location');
             $table->string('street');
             $table->string('area');
-            $table->decimal('price',12,2);
+            $table->decimal('price', 12, 2)->nullable();
             $table->string('status')->default('pending');
-            $table->date('appointment_at');
+            $table->date('appointment_at')->nullable();
             $table->timestamps();
         });
     }

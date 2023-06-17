@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\User\FavouriteController;
-use App\Http\Controllers\User\CategoryController ;
+use App\Http\Controllers\User\CategoryController;
 use App\Http\Controllers\User\MaintenanceController;
 use App\Http\Controllers\User\OrderController;
-use App\Http\Controllers\User\ProductController ;
+use App\Http\Controllers\User\ProductController;
 use App\Http\Resources\Admin\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
@@ -26,35 +26,34 @@ use Ite\IotCore\Context\UserActivityContext;
 
 
 ##################### User api
-Route::get('all-category',[CategoryController::class ,'getAllCategory']);
-Route::get('get-By-Category/{category}',[ProductController::class ,'getProductByCategory']);
-Route::get('product/show/{product}',[ProductController::class ,'show'])->middleware('role');
-Route::get('get-spe-product',[ProductController::class ,'getSpecialProduct']);
+Route::get('all-category', [CategoryController::class, 'getAllCategory']);
+Route::get('get-By-Category/{category}', [ProductController::class, 'getProductByCategory']);
+Route::get('product/show/{product}', [ProductController::class, 'show'])->middleware('role');
+Route::get('get-spe-product', [ProductController::class, 'getSpecialProduct']);
 
-Route::get('product/favourite/{product}',[FavouriteController::class,'toggleFavourite'])->middleware('role');
-Route::get('product/get-favourite',[FavouriteController::class,'getFavourite'])->middleware('role');
+Route::get('product/favourite/{product}', [FavouriteController::class, 'toggleFavourite'])->middleware('role');
+Route::get('product/get-favourite', [FavouriteController::class, 'getFavourite'])->middleware('role');
 
 
-Route::group(['prefix'=>'order'],function(){
-    Route::post('check',[OrderController::class , 'checkOrder'])->middleware('role');    
-    Route::post('payment',[OrderController::class , 'createOrder'])->middleware('role');    
-
+Route::group(['prefix' => 'order'], function () {
+    Route::post('check', [OrderController::class, 'checkOrder'])->middleware('role');
+    Route::post('payment', [OrderController::class, 'createOrder'])->middleware('role');
 });
 
 
 
-Route::get('test',function(Request $request ,UserActivityContext $context){
+Route::get('test', function (Request $request, UserActivityContext $context) {
     $product = Product::latest()->first();
     $spe_product = Product::find(44396);
     $image = $product->getFirstMedia('main_image');
-    $image->copy($spe_product ,'main_image','product');
+    $image->copy($spe_product, 'main_image', 'product');
     $spe_product->save();
     dd();
     dd($context->getUsersActivities());
 });
 // Route::resource('maintenance', MaintenanceController::class)->only('store','update');
 
-Route::post('maintenance/create/{service}',[MaintenanceController::class ,'createCard'])->middleware('role');
-Route::post('maintenance/update/{maintenance}',[MaintenanceController::class ,'update'])->middleware('role');
-Route::post('maintenance/delete/{maintenance}',[MaintenanceController::class ,'delete'])->middleware('role');
-Route::get('maintenance/index',[MaintenanceController::class ,'index'])->middleware('role');
+Route::post('maintenance/{service}', [MaintenanceController::class, 'createCard'])->middleware('role');
+Route::put('maintenance/{maintenance}', [MaintenanceController::class, 'update'])->middleware('role');
+Route::delete('maintenance/{maintenance}', [MaintenanceController::class, 'delete'])->middleware('role');
+Route::get('maintenance', [MaintenanceController::class, 'index'])->middleware('role');
