@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\MaintenanceController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -15,3 +16,6 @@ Route::get('product/change-status/{product}',[ProductController::class , 'change
 
 Route::get('order',[OrderController::class , 'index']);
 Route::get('order/{order}',[OrderController::class , 'show']);
+
+Route::resource('maintenance',MaintenanceController::class)->only('index','update');
+// Route::post('maintenance/addPrice/{Maintenance}',[MaintenanceC])
