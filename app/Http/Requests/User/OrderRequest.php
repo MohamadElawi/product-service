@@ -6,6 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
+
 class OrderRequest extends FormRequest
 {
     public function authorize()
@@ -25,6 +26,10 @@ class OrderRequest extends FormRequest
             'order.*.product_id'=>'required|exists:products,id',
             'order.*.quantity' =>'required|numeric|gt:0',
         ];
+    }
+
+    public function failedValidation(Validator $validator){
+        throw new HttpResponseException(failure($validator->errors(),422));
     }
 
 }
