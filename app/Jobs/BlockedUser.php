@@ -30,7 +30,6 @@ class BlockedUser implements ShouldQueue
      */
     public function handle(UserActivityManager $manager)
     {
-        echo "opdjfsnf";
         // echo $this->user->id .' '. $this->user->user_name .' '. $this->message .PHP_EOL ;
         //                $mapper = new JsonMapper();
         // //                /** @var UserActivity $userActivity */
@@ -39,6 +38,9 @@ class BlockedUser implements ShouldQueue
         $userActivity = new UserActivity();
         $userActivity->id = $this->user['id'];
         $userActivity->name =$this->user['user_name'] ;
-        $manager->add($userActivity);
+        if($this->message == 'blocked')
+            $manager->add($userActivity);
+        else
+            $manager->remove($userActivity);
     }
 }

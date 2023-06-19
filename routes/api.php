@@ -43,12 +43,6 @@ Route::group(['prefix' => 'order'], function () {
 
 
 Route::get('test', function (Request $request, UserActivityContext $context) {
-    $product = Product::latest()->first();
-    $spe_product = Product::find(44396);
-    $image = $product->getFirstMedia('main_image');
-    $image->copy($spe_product, 'main_image', 'product');
-    $spe_product->save();
-    dd();
     dd($context->getUsersActivities());
 });
 // Route::resource('maintenance', MaintenanceController::class)->only('store','update');
