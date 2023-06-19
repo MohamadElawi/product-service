@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\DB;
 
 class MaintenanceController extends Controller
 {
+
+    public function index()
+    {
+        $user = auth()->user();
+        $maintenance_cards = Maintenance::where("user_id", $user->id)->latest()->get();
+        return response()->json(MaintenanceResource::collection($maintenance_cards));
+    }
+
     public function createCard($service, MaintenanceRequest $request)
     {
         $user = auth()->user();
@@ -22,6 +30,7 @@ class MaintenanceController extends Controller
             'user_phone' => $user->phone,
             'user_email' => $user->email,
             'service_id' => $service,
+            'service_name' => 'service1',
             'description' => $request->description,
             'location' => $request->location,
             'street' => $request->street,
@@ -48,12 +57,6 @@ class MaintenanceController extends Controller
     }
 
 
-    public function index()
-    {
-        $user = auth()->user();
-        $maintenance_cards = Maintenance::where("user_id", $user->id)->latest()->get();
-        return response()->json(MaintenanceResource::collection($maintenance_cards));
-    }
     public function delete(maintenance $maintenance)
     {
         $user = auth()->user();

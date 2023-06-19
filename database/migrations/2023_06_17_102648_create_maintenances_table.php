@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
             $table->string('service_id');
+            $table->string('service_name');
             $table->integer('user_id');
             $table->string('user_name');
             $table->string('user_phone');

@@ -11,7 +11,8 @@ class MaintenanceResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'service_id' => $this->serveice_id,
+            'service_id' => $this->service_id,
+            'service_name' => $this->service_name,
             'description' => $this->description,
             'location' => $this->location,
             'street' => $this->street,

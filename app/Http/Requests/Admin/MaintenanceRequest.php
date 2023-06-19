@@ -27,10 +27,10 @@ class MaintenanceRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_date'=>'required|date',
-            'secound_date'=>'required|date',
-            'third_date'=>'required|required',
-        
+            'datetime1'=>'required|date',
+            'datetime2'=>'required|date',
+            'datetime3'=>'required|required',
+
         ];
     }
     public function failedValidation(ValidationValidator $validator){

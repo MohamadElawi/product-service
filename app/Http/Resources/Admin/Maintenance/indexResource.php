@@ -11,13 +11,14 @@ class indexResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'service_id' => $this->serveice_id,
+            'service_id' => $this->service_id,
+            'service_name' => $this->service_name,
             'user_id' => $this->user_id,
             'user_name' => $this->user_name,
             'user_email' => $this->user_email,
             'user_phone' => $this->user_phone,
             'status' => $this->status,
-            'appointmant_at' => $this->appointment_at
+            'created_at' => $this->created_at->format('Y-m-d H:i')
         ];
     }
 }
